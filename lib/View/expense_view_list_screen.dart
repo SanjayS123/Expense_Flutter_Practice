@@ -45,6 +45,28 @@ class _ExpenseViewListScreenState extends State<ExpenseViewListScreen> {
                         backgroundColor: Color(0xff75985E),
                         child: Image.asset('assets/images/epense_category_frame.png'),
 
+                      ),
+                      Column(
+                        children: [
+                          Text('Expense Category',style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          )),
+                          Row(
+                            children: [
+                              Text('Payment via : ',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Color(0xff6B6E7B)
+                              ),),
+                              Text('Cash',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color(0xff626F8A)
+                                ),)
+                            ]
+                          )
+                        ],
                       )
                     ]
                   ),
