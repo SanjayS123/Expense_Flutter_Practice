@@ -10,6 +10,9 @@ class ExpenseViewListScreen extends StatefulWidget {
 class _ExpenseViewListScreenState extends State<ExpenseViewListScreen> {
   @override
   Widget build(BuildContext context) {
+
+    final List<Color>bgColors = [Color(0xffEB8080),Color(0xffA080EB),Color(0xffEBE080),Color(0xff80B6EB),Color(0xffEB809B),Color(0xff8EC872),];
+
     return Scaffold(
       backgroundColor: Color(0xffFAFAFA),
       appBar: AppBar(
@@ -24,51 +27,90 @@ class _ExpenseViewListScreenState extends State<ExpenseViewListScreen> {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: Row(children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Color(0xffFFFFFF),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+            child: Row(
+                children: [
               Text("List of all your business expense"),
               Spacer(),
-              Image.asset('assets/images/filtericon.png'),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  padding: EdgeInsets.all(5),
+                  side: BorderSide(color: Color(0xffF4F4F6),width: 1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)
+                  )
+                ),
+                onPressed: (){},
+                  child: Image.asset('assets/images/filtericon.png')),
             ]),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20,vertical: 15),
+            child: Row(
+              children: [
+                Image.asset('assets/images/calender_icon.png'),
+                SizedBox(width: 10,),
+                Text('26 Oct 2026',
+                style: TextStyle(
+                  color: Color(0xff6B6E7B),
+                  fontSize: 13
+                ),),
+              ]
+            ),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: 10, // Replace with your actual list length
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+              itemCount: 10,
               itemBuilder: (context, index) {
-                return Container(
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Color(0xff75985E),
-                        child: Image.asset('assets/images/epense_category_frame.png'),
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: 4),
+                  child: Container(
+                    color: Color(0xffFFFFFF),
+                    padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 23.5,
+                          backgroundColor: bgColors[index % bgColors.length],
+                          child: Image.asset('assets/images/epense_category_frame.png'),
 
-                      ),
-                      Column(
-                        children: [
-                          Text('Expense Category',style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          )),
-                          Row(
-                            children: [ //
-                              Text('Payment via : ',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Color(0xff6B6E7B)
-                              ),),
-                              Text('Cash',
+                        ),
+                        SizedBox(width: 10,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Expense Category',style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            )),
+                            SizedBox(height: 5,),
+                            Row(
+                              children: [ //
+                                Text('Payment via : ',
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xff626F8A)
-                                ),)
-                            ]
-                          )
-                        ],
-                      )
-                    ]
+                                  fontSize: 12,
+                                  color: Color(0xff6B6E7B)
+                                ),),
+                                Text('Cash',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      color: Color(0xff626F8A)
+                                  ),)
+                              ]
+                            )
+                          ],
+                        ),
+                        Spacer(),
+                        Text('₹ 1,200',
+                        style: TextStyle(fontSize: 14,fontWeight: FontWeight.w700, color: Color(0xff000000)),),
+                        SizedBox(width: 5,),
+                        Image.asset('assets/images/expense_payout_frame.png')
+                      ]
+                    ),
                   ),
                 );
               },
@@ -78,26 +120,31 @@ class _ExpenseViewListScreenState extends State<ExpenseViewListScreen> {
       ),
 
       // ADD THE BUTTON HERE:
-      floatingActionButton: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xff75985E), // Matching your AppBar
-          foregroundColor: Colors.white,
-          fixedSize: const Size(180, 55), // Custom Width and Height
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8), // Custom Border Radius
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: 15),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(0xff75985E), // Matching your AppBar
+            foregroundColor: Colors.white,
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+            //fixedSize: const Size(180, 55), // Custom Width and Height
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8), // Custom Border Radius
+            ),
+            elevation: 5,
           ),
-          elevation: 5,
-        ),
-        onPressed: () {
-          // Action for adding expense
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset('assets/images/addexpense.png'),
-            SizedBox(width: 8),
-            Text("Add Expense"),
-          ],
+          onPressed: () {
+            // Action for adding expense
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/images/addexpense.png'),
+              SizedBox(width: 8),
+              Text("Add Expense"),
+            ],
+          ),
         ),
       ),
       // Optional: Center it at the bottom
