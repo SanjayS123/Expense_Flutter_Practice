@@ -48,24 +48,31 @@ class _ExpenseViewListScreenState extends State<ExpenseViewListScreen> {
                   child: Image.asset('assets/images/filtericon.png')),
             ]),
           ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-            child: Row(
-              children: [
-                Image.asset('assets/images/calender_icon.png'),
-                SizedBox(width: 10,),
-                Text('26 Oct 2026',
-                style: TextStyle(
-                  color: Color(0xff6B6E7B),
-                  fontSize: 13
-                ),),
-              ]
-            ),
-          ),
+
           Expanded(
             child: ListView.builder(
-              itemCount: 10,
+              itemCount: 18,
               itemBuilder: (context, index) {
+
+                if(index == 0){
+                  return Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20,vertical: 15),
+                    child: Row(
+                        children: [
+                          Image.asset('assets/images/calender_icon.png'),
+                          SizedBox(width: 10,),
+                          Text('26 Oct 2026',
+                            style: TextStyle(
+                                color: Color(0xff6B6E7B),
+                                fontSize: 13
+                            ),),
+                        ]
+                    ),
+                  );
+                }
+
+                int itemIndex = index - 1;
+
                 return Padding(
                   padding: EdgeInsets.symmetric(vertical: 4),
                   child: Container(
