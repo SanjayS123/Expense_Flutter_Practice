@@ -10,17 +10,22 @@ class ExpenseViewListScreen extends StatefulWidget {
 class _ExpenseViewListScreenState extends State<ExpenseViewListScreen> {
   @override
   Widget build(BuildContext context) {
-
-    final List<Color>bgColors = [Color(0xffEB8080),Color(0xffA080EB),Color(0xffEBE080),Color(0xff80B6EB),Color(0xffEB809B),Color(0xff8EC872),];
+    final List<Color> bgColors = [
+      Color(0xffEB8080),
+      Color(0xffA080EB),
+      Color(0xffEBE080),
+      Color(0xff80B6EB),
+      Color(0xffEB809B),
+      Color(0xff8EC872),
+    ];
+    List<dynamic> expenseList = [1,2,3,4];
 
     return Scaffold(
       backgroundColor: Color(0xffFAFAFA),
       appBar: AppBar(
-        title: Text("Expense",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-          ),
+        title: Text(
+          "Expense",
+          style: TextStyle(color: Colors.white, fontSize: 16),
         ),
         centerTitle: true,
         backgroundColor: Color(0xff75985E),
@@ -28,101 +33,128 @@ class _ExpenseViewListScreenState extends State<ExpenseViewListScreen> {
       body: Column(
         children: [
           Container(
-            decoration: BoxDecoration(
-              color: Color(0xffFFFFFF),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+            decoration: BoxDecoration(color: Color(0xffFFFFFF)),
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Row(
-                children: [
-              Text("List of all your business expense"),
-              Spacer(),
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  padding: EdgeInsets.all(5),
-                  side: BorderSide(color: Color(0xffF4F4F6),width: 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)
-                  )
+              children: [
+                Text("List of all your business expense"),
+                Spacer(),
+                OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.all(5),
+                    side: BorderSide(color: Color(0xffF4F4F6), width: 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Image.asset('assets/images/filtericon.png'),
                 ),
-                onPressed: (){},
-                  child: Image.asset('assets/images/filtericon.png')),
-            ]),
+              ],
+            ),
           ),
 
           Expanded(
-            child: ListView.builder(
-              itemCount: 18,
-              itemBuilder: (context, index) {
-
-                if(index == 0){
-                  return Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20,vertical: 15),
-                    child: Row(
-                        children: [
-                          Image.asset('assets/images/calender_icon.png'),
-                          SizedBox(width: 10,),
-                          Text('26 Oct 2026',
-                            style: TextStyle(
-                                color: Color(0xff6B6E7B),
-                                fontSize: 13
-                            ),),
-                        ]
-                    ),
-                  );
-                }
-
-                int itemIndex = index - 1;
-
-                return Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4),
-                  child: Container(
-                    color: Color(0xffFFFFFF),
-                    padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 23.5,
-                          backgroundColor: bgColors[index % bgColors.length],
-                          child: Image.asset('assets/images/epense_category_frame.png'),
-
-                        ),
-                        SizedBox(width: 10,),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Expense Category',style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            )),
-                            SizedBox(height: 5,),
-                            Row(
-                              children: [ //
-                                Text('Payment via : ',
+            child: expenseList.isEmpty
+                ? _emptyList()
+                : ListView.builder(
+                    itemCount: expenseList.length + 1,
+                    itemBuilder: (context, index) {
+                      if (index == 0) {
+                        return Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 15,
+                          ),
+                          child: Row(
+                            children: [
+                              Image.asset('assets/images/calender_icon.png'),
+                              SizedBox(width: 10),
+                              Text(
+                                '26 Oct 2026',
                                 style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color(0xff6B6E7B)
-                                ),),
-                                Text('Cash',
-                                  style: TextStyle(
+                                  color: Color(0xff6B6E7B),
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+
+                      //int itemIndex = index - 1;
+
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 4),
+                        child: Container(
+                          color: Color(0xffFFFFFF),
+                          padding: EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 10,
+                          ),
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 23.5,
+                                backgroundColor:
+                                    bgColors[index % bgColors.length],
+                                child: Image.asset(
+                                  'assets/images/epense_category_frame.png',
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Expense Category',
+                                    style: TextStyle(
                                       fontSize: 14,
-                                      color: Color(0xff626F8A)
-                                  ),)
-                              ]
-                            )
-                          ],
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Row(
+                                    children: [
+                                      //
+                                      Text(
+                                        'Payment via : ',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Color(0xff6B6E7B),
+                                        ),
+                                      ),
+                                      Text(
+                                        'Cash',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xff626F8A),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
+                              Text(
+                                '₹ 1,200',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xff000000),
+                                ),
+                              ),
+                              SizedBox(width: 5),
+                              Image.asset(
+                                'assets/images/expense_payout_frame.png',
+                              ),
+                            ],
+                          ),
                         ),
-                        Spacer(),
-                        Text('₹ 1,200',
-                        style: TextStyle(fontSize: 14,fontWeight: FontWeight.w700, color: Color(0xff000000)),),
-                        SizedBox(width: 5,),
-                        Image.asset('assets/images/expense_payout_frame.png')
-                      ]
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          )
+          ),
         ],
       ),
 
@@ -156,7 +188,31 @@ class _ExpenseViewListScreenState extends State<ExpenseViewListScreen> {
       ),
       // Optional: Center it at the bottom
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-
     );
   }
+}
+
+Widget _emptyList() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 15),
+    child: Container(
+      color: Color(0xffFAFAFA),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset('assets/images/emptypage.png'),
+          Text(
+            'No Expenses Logged Yet',
+            style: TextStyle(color: Colors.black, fontSize: 14),
+          ),
+          Text(
+            "This is where you'll see a list of all your business expenses. Get started by adding your first one",
+            style: TextStyle(color: Colors.grey, fontSize: 14),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    ),
+  );
 }
