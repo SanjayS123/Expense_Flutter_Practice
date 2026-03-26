@@ -116,6 +116,16 @@ class _createexpenseState extends State<createexpense> {
                                 border: InputBorder.none,
                               )
                           )),
+                          SizedBox(width: 5,),
+                          Container(
+                            height: 22,
+                            width: 22,
+                            decoration: BoxDecoration(
+                              color: Color(0xffD0E0C5),
+                              borderRadius: BorderRadius.circular(5)
+                            ),
+                            child: Image.asset('assets/images/ruppee_icon.png'),
+                          )
                         ]
                     ),
                   ]
