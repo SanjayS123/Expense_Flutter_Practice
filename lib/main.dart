@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:untitled1/View/create_expense_screen.dart';
 import 'package:untitled1/View/expense_list_screen.dart';
+import 'package:untitled1/View/laundry_button_screen.dart';
 import 'package:untitled1/View/laundry_item_screen.dart';
+import 'package:untitled1/View/laundry_item_screen2.dart';
 import 'package:untitled1/View/laundry_trackitems_screen.dart';
 import 'package:untitled1/View/reservation_details_screen.dart';
 import 'package:untitled1/View/salary_details_screen.dart';
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RoomServiceScreen(),
+      home: LaundryButtonScreen(),
     );
   }
 }
